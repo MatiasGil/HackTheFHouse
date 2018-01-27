@@ -568,7 +568,7 @@ Prefab:
     - target: {fileID: 114710281802722218, guid: 2991f9889f9e346d4ad45bac0a16b89f,
         type: 2}
       propertyPath: infectTimer
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2991f9889f9e346d4ad45bac0a16b89f, type: 2}
@@ -703,7 +703,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1055,7 +1055,7 @@ Prefab:
     - target: {fileID: 114710281802722218, guid: 2991f9889f9e346d4ad45bac0a16b89f,
         type: 2}
       propertyPath: infectTimer
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2991f9889f9e346d4ad45bac0a16b89f, type: 2}
@@ -1341,7 +1341,7 @@ Prefab:
     - target: {fileID: 114710281802722218, guid: 2991f9889f9e346d4ad45bac0a16b89f,
         type: 2}
       propertyPath: infectTimer
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2991f9889f9e346d4ad45bac0a16b89f, type: 2}
@@ -1552,7 +1552,7 @@ Prefab:
     - target: {fileID: 114710281802722218, guid: 2991f9889f9e346d4ad45bac0a16b89f,
         type: 2}
       propertyPath: infectTimer
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2991f9889f9e346d4ad45bac0a16b89f, type: 2}
@@ -1703,7 +1703,7 @@ Prefab:
     - target: {fileID: 114710281802722218, guid: 2991f9889f9e346d4ad45bac0a16b89f,
         type: 2}
       propertyPath: infectTimer
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2991f9889f9e346d4ad45bac0a16b89f, type: 2}
@@ -2092,7 +2092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorController: {fileID: 1578757990}
-  activeElectricElement: {fileID: 1922296369}
+  activeElectricElement: {fileID: 1590346518}
 --- !u!212 &1578757992
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2144,7 +2144,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1578757989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

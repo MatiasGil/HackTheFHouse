@@ -17,7 +17,8 @@ public class ElectricElement : MonoBehaviour {
 		infected,
 		desinfected,
 		beingInfected,
-		beingDesinfected
+		beingDesinfected,
+		unpluged
 	}
 
 	[System.Serializable]
@@ -53,6 +54,7 @@ public class ElectricElement : MonoBehaviour {
 
 	private Color desinfectedColor;
 	private Color infectedColor;
+	private Color unpluggedColor;
 
 	private SpriteRenderer thisSpriteRenderer;
 
@@ -61,6 +63,7 @@ public class ElectricElement : MonoBehaviour {
 		thisSpriteRenderer = GetComponent<SpriteRenderer> ();
 		desinfectedColor = Color.blue;
 		infectedColor = Color.green;
+		unpluggedColor = Color.red;
 
 		thisSpriteRenderer.color = desinfectedColor;
 
@@ -70,7 +73,7 @@ public class ElectricElement : MonoBehaviour {
 
 	private void Update()
 	{
-		if (activeState != State.desinfected && activeState != State.infected) {
+		if (activeState == State.beingInfected || activeState == State.beingDesinfected) {
 			ProcessState ();
 			ProcessAnimation ();
 		}
@@ -124,7 +127,6 @@ public class ElectricElement : MonoBehaviour {
 
 	public void StartInfection()
 	{
-		Debug.Log (string.Format ("ElectricElement name: {0}, started infection", transform.name));
 		if (canAlertGuards) {
 		
 			//TODO: alert
@@ -144,8 +146,6 @@ public class ElectricElement : MonoBehaviour {
 		} else {
 			infectPercent = 100 - Mathf.FloorToInt(timeLeftToInfect * 100 / infectTimer); 
 		}
-
-		Debug.Log (string.Format ("ElectricElement name: {0}, has infect percent of: {1}", transform.name, infectPercent));
 	}
 
 	private void ProcessDesinfect()
@@ -182,6 +182,9 @@ public class ElectricElement : MonoBehaviour {
 
     public void Unplug ()
     {
-        Debug.Log("ElectricElement unpluged");
+		activeState = State.unpluged;
+		infectPercent = 0;
+		timeLeftToInfect = infectTimer;
+		thisSpriteRenderer.color = unpluggedColor;
     }
 }

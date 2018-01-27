@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField]
 	private ElectricElement activeElectricElement;
 
+	private bool moving = false;
 
 	private void Update()
 	{
@@ -32,56 +33,60 @@ public class PlayerController : MonoBehaviour {
 
 	private void MoveLeft()
 	{
+		if (moving)
+			return;
+
 		if (activeElectricElement.leftRelation.electricElement != null) {
+			moving = true;
 			Invoke ("ChangePosition", .5f);
-
+			Invoke ("EnableMoving", 1f);
 			activeElectricElement.PlayerDeparted (Direction.left);
-
 			activeElectricElement = activeElectricElement.leftRelation.electricElement;
-			activeElectricElement.PlayerArrived ();
-
 			animatorController.SetTrigger ("move");
 		}	
 	}
 
 	private void MoveRight()
 	{
+		if (moving)
+			return;
+
 		if (activeElectricElement.rightRelation.electricElement != null) {
+			moving = true;
 			Invoke ("ChangePosition", .5f);
-
+			Invoke ("EnableMoving", 1f);
 			activeElectricElement.PlayerDeparted (Direction.right);
-
 			activeElectricElement = activeElectricElement.rightRelation.electricElement;
-			activeElectricElement.PlayerArrived ();
-
 			animatorController.SetTrigger ("move");
 		}	
 	}
 
 	private void MoveUp()
 	{
+		if (moving)
+			return;
+
 		if (activeElectricElement.topRelation.electricElement != null) {
+			moving = true;
 			Invoke ("ChangePosition", .5f);
-
+			Invoke ("EnableMoving", 1f);
 			activeElectricElement.PlayerDeparted (Direction.up);
-
 			activeElectricElement = activeElectricElement.topRelation.electricElement;
-			activeElectricElement.PlayerArrived ();
-
 			animatorController.SetTrigger ("move");
 		}	
 	}
 
 	private void MoveDown()
 	{
+		if (moving)
+			return;
+
 		if (activeElectricElement.botRelation.electricElement != null) {
+			moving = true;
 			Invoke ("ChangePosition", .5f);
-
+			Invoke ("EnableMoving", 1f);
 			activeElectricElement.PlayerDeparted (Direction.down);
-
 			activeElectricElement = activeElectricElement.botRelation.electricElement;
-			activeElectricElement.PlayerArrived ();
-
 			animatorController.SetTrigger ("move");
 		}
 	}
@@ -89,5 +94,11 @@ public class PlayerController : MonoBehaviour {
 	private void ChangePosition()
 	{
 		transform.position = activeElectricElement.ActualPosition;
+		activeElectricElement.PlayerArrived ();
+	}
+
+	private void EnableMoving()
+	{
+		moving = false;
 	}
 }
