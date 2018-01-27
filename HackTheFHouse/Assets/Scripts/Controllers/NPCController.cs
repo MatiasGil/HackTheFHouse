@@ -25,7 +25,7 @@ public class NPCController : MonoBehaviour {
         {
 			iNPCBehaviour thisBehaviour = behaviourObject.GetComponent<iNPCBehaviour> ();
 			allBehaviours.Add (thisBehaviour.getName (), thisBehaviour);
-            thisBehaviour.Init(transform);
+            thisBehaviour.Init(transform, this);
 		}
 	}
 
@@ -36,33 +36,39 @@ public class NPCController : MonoBehaviour {
 
 	private void Update()
 	{
-		SearchForEnemies ();
 		activeBehaviour.OnUpdate ();
 	}
 
-	private void ChangeBehaviourTo(string behaviourId)
+	private void ChangeBehaviourTo(string behaviourId, ElectricElement electricElement = null)
 	{
 		iNPCBehaviour targetBehaviuor = null;
 		if (allBehaviours.TryGetValue (behaviourId, out targetBehaviuor))
         {
 			activeBehaviour = targetBehaviuor;
 			activeBehaviour.OnEnter ();
-		}
+
+            if (behaviourId == "Aggressive")
+                activeBehaviour.SetTarget(electricElement);
+        }
         else
         {
 			Debug.LogWarning ("There is no behaviour with that id, behaviour did not change");
 		}
 	}
 
-	private void SearchForEnemies()
-	{
-		//TODO: tiene que cambiar o no a agresivo
-	}
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.name == "Player")
-            Debug.Log("Vio el player");
+        //if (collision.GetComponent<ElectricElement>().activeState == ElectricElement.State.beingInfected)
+        if (collision.tag == "ElectricElement")
+        {
+            ChangeBehaviourTo("Aggressive", collision.GetComponent<ElectricElement>());
+        }   
     }
 
+    public void BehaviourIsDone()
+    {
+        if (activeBehaviour.getName() == "Aggressive")
+            ChangeBehaviourTo("FollowPath");
+    }
+    
 }

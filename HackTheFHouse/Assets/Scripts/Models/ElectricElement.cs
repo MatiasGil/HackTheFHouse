@@ -151,4 +151,9 @@ public class ElectricElement : MonoBehaviour {
 		timeLeftToInfect = infectTimer;
 		activeState = State.desinfected;
 	}
+
+    public void Unplug ()
+    {
+        Debug.Log("ElectricElement unpluged");
+    }
 }

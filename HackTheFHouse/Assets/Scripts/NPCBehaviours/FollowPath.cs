@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowPath : MonoBehaviour, iNPCBehaviour {
-
+public class FollowPath : MonoBehaviour, iNPCBehaviour
+{
 	private Transform npcTransform;
+    private NPCController npcController;
 
-	[SerializeField]
+    [SerializeField]
 	private string name;
 
     [SerializeField]
@@ -21,10 +22,11 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour {
     [SerializeField]
     private int threshold;
 
-	public void Init(Transform npcTrasform)
+	public void Init(Transform npcTrasform, NPCController npcController)
 	{
 		this.npcTransform = npcTrasform;
-	}
+        this.npcController = npcController;
+    }
 
 	public void OnEnter()
 	{
@@ -54,4 +56,14 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour {
 	{
 		return name;
 	}
+
+    public void SetTarget(ElectricElement electricElement)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void IsDone()
+    {
+        throw new System.NotImplementedException();
+    }
 }

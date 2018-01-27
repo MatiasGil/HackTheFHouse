@@ -6,6 +6,8 @@ public interface iNPCBehaviour {
 	
 	void OnEnter();
 	void OnUpdate();
-	void Init (Transform npcTransform);
+	void Init (Transform npcTransform, NPCController npcController);
 	string getName ();
+    void SetTarget(ElectricElement electricElement);
+    void IsDone();
 }
