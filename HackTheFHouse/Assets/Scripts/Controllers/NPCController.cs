@@ -19,10 +19,13 @@ public class NPCController : MonoBehaviour {
 
 	private void Awake()
 	{
-		foreach (GameObject behaviourObject in npcBehavioursObjects) {
-		
+        animatorController = GetComponent<Animator>();
+
+		foreach (GameObject behaviourObject in npcBehavioursObjects)
+        {
 			iNPCBehaviour thisBehaviour = behaviourObject.GetComponent<iNPCBehaviour> ();
 			allBehaviours.Add (thisBehaviour.getName (), thisBehaviour);
+            thisBehaviour.Init(transform);
 		}
 	}
 
@@ -34,17 +37,23 @@ public class NPCController : MonoBehaviour {
 	private void Update()
 	{
 		SearchForEnemies ();
-
 		activeBehaviour.OnUpdate ();
+
+        if (Input.GetKeyUp(KeyCode.Space))
+            ChangeBehaviourTo("Path3");
+
 	}
 
 	private void ChangeBehaviourTo(string behaviourId)
 	{
 		iNPCBehaviour targetBehaviuor = null;
-		if (allBehaviours.TryGetValue (behaviourId, out targetBehaviuor)) {
+		if (allBehaviours.TryGetValue (behaviourId, out targetBehaviuor))
+        {
 			activeBehaviour = targetBehaviuor;
 			activeBehaviour.OnEnter ();
-		} else {
+		}
+        else
+        {
 			Debug.LogWarning ("There is no behaviour with that id, behaviour did not change");
 		}
 	}
