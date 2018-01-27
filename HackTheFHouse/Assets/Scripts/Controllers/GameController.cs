@@ -29,4 +29,14 @@ public class GameController : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void MainMenu ()
+    {
+        SceneManager.LoadScene("Main");
+    }
+
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
 }
