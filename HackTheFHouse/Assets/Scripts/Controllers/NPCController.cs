@@ -38,10 +38,6 @@ public class NPCController : MonoBehaviour {
 	{
 		SearchForEnemies ();
 		activeBehaviour.OnUpdate ();
-
-        if (Input.GetKeyUp(KeyCode.Space))
-            ChangeBehaviourTo("Path3");
-
 	}
 
 	private void ChangeBehaviourTo(string behaviourId)
@@ -62,4 +58,11 @@ public class NPCController : MonoBehaviour {
 	{
 		//TODO: tiene que cambiar o no a agresivo
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name == "Player")
+            Debug.Log("Vio el player");
+    }
+
 }
