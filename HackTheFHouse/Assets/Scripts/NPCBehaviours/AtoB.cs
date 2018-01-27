@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveABPoints : iNPCBehaviour {
+public class AtoB : MonoBehaviour, iNPCBehaviour {
 
-	private Vector2 pointA;
-	private Vector2 pointB;
 	private Transform npcTransform;
 
-	public MoveABPoints(Vector2 pointA, Vector2 pointB, Transform npcTrasform)
+	[SerializeField]
+	private string name;
+
+	[SerializeField]
+	private Transform pointA;
+	[SerializeField]
+	private Transform pointB;
+
+	public void Init(Transform npcTrasform)
 	{
-		this.pointA = pointA;
-		this.pointB = pointB;
 		this.npcTransform = npcTrasform;
 	}
 
@@ -23,5 +27,10 @@ public class MoveABPoints : iNPCBehaviour {
 	public void OnUpdate()
 	{
 		//TODO: Mover  npc transform de pointa a point b
+	}
+
+	public string getName()
+	{
+		return name;
 	}
 }

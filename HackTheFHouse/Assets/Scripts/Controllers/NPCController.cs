@@ -6,6 +6,12 @@ public class NPCController : MonoBehaviour {
 
 	private iNPCBehaviour activeBehaviour;
 
+	[SerializeField]
+	private Animator animatorController;
+
+	[SerializeField]
+	private GameObject[] npcBehavioursObjects;
+
 	private Dictionary<string, iNPCBehaviour> allBehaviours = new Dictionary<string, iNPCBehaviour>();
 
 	[SerializeField]
@@ -13,8 +19,11 @@ public class NPCController : MonoBehaviour {
 
 	private void Awake()
 	{
-		allBehaviours.Add ("pointAtoB", activeBehaviour);
-		//TODO: add more behaviours
+		foreach (GameObject behaviourObject in npcBehavioursObjects) {
+		
+			iNPCBehaviour thisBehaviour = behaviourObject.GetComponent<iNPCBehaviour> ();
+			allBehaviours.Add (thisBehaviour.getName (), thisBehaviour);
+		}
 	}
 
 	private void Start()
