@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
         StartCoroutine(UIController.instance.Fade(false));
         SceneManager.LoadScene("Home");
         StartCoroutine(UIController.instance.Fade(true));
+        AudioController.instance.GameMusic();
     }
 
     public void Exit()
