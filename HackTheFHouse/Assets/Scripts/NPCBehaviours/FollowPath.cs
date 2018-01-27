@@ -17,15 +17,18 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
     private int currentTargetPoint;
 
     [SerializeField]
-    private int speed = 1;
+	private float speed = 1;
 
     [SerializeField]
-    private int threshold;
+	private float threshold;
+
+	private BehaviourType @type;
 
 	public void Init(Transform npcTrasform, NPCController npcController)
 	{
 		this.npcTransform = npcTrasform;
         this.npcController = npcController;
+		@type = BehaviourType.pasive;
     }
 
 	public void OnEnter()
@@ -66,4 +69,9 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
     {
         throw new System.NotImplementedException();
     }
+
+	public BehaviourType getType()
+	{
+		return @type;
+	}
 }

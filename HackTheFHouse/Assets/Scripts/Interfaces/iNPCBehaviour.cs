@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BehaviourType
+{
+	aggressive,
+	pasive
+}
+
 public interface iNPCBehaviour {
 	
 	void OnEnter();
@@ -10,4 +16,5 @@ public interface iNPCBehaviour {
 	string getName ();
     void SetTarget(ElectricElement electricElement);
     void IsDone();
+	BehaviourType getType();
 }

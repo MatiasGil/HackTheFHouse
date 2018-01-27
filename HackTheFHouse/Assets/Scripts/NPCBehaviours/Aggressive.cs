@@ -20,21 +20,43 @@ public class Aggressive : MonoBehaviour, iNPCBehaviour
     private int currentTargetPoint;
 
     [SerializeField]
-    private int speed = 1;
+	private float speed = 1;
 
     [SerializeField]
-    private int threshold;
+	private float threshold;
+
+	private BehaviourType @type;
 
     public void Init(Transform npcTrasform, NPCController npcController)
     {
         this.npcTransform = npcTrasform;
         this.npcController = npcController;
+		@type = BehaviourType.aggressive;
     }
 
     public void OnEnter()
     {
         LookAtPoint();
         alert = true;
+
+
+		float minDistance = 0; 
+
+		for (int i = 0; i < points.Length; i++) {
+
+			float distance = Vector2.Distance (transform.position, points [i].position);
+
+			if (i == 0) {
+				minDistance = distance;
+			} else {
+				if (minDistance > distance) {
+					minDistance = distance;
+					currentTargetPoint = i;
+				}
+			}
+
+
+		}
     }
 
     public void OnUpdate()
@@ -84,4 +106,8 @@ public class Aggressive : MonoBehaviour, iNPCBehaviour
         npcController.BehaviourIsDone();
     }
 
+	public BehaviourType getType()
+	{
+		return @type;
+	}
 }

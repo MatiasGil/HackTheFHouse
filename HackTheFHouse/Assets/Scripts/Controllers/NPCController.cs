@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCController : MonoBehaviour {
-
+	
 	private iNPCBehaviour activeBehaviour;
 
 	[SerializeField]
@@ -47,7 +47,7 @@ public class NPCController : MonoBehaviour {
 			activeBehaviour = targetBehaviuor;
 			activeBehaviour.OnEnter ();
 
-            if (behaviourId == "Aggressive")
+			if (activeBehaviour.getType() == BehaviourType.aggressive)
                 activeBehaviour.SetTarget(electricElement);
         }
         else
@@ -58,16 +58,25 @@ public class NPCController : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        //if (collision.GetComponent<ElectricElement>().activeState == ElectricElement.State.beingInfected)
+        
         if (collision.tag == "ElectricElement")
         {
-            ChangeBehaviourTo("Aggressive", collision.GetComponent<ElectricElement>());
+			ElectricElement targetElectricElement = collision.GetComponent<ElectricElement> ();
+			if (targetElectricElement.activeState == ElectricElement.State.beingInfected) {
+				if (activeBehaviour.getType () != BehaviourType.aggressive) {
+					ChangeBehaviourTo (string.Format ("Aggressive_{0}", targetElectricElement.name), targetElectricElement);
+				}
+			} else if (targetElectricElement.activeState == ElectricElement.State.beingDesinfected || targetElectricElement.activeState == ElectricElement.State.infected) {
+				if (activeBehaviour.getType () == BehaviourType.aggressive) {
+					ChangeBehaviourTo ("FollowPath");
+				}
+			}
         }   
     }
 
     public void BehaviourIsDone()
     {
-        if (activeBehaviour.getName() == "Aggressive")
+		if (activeBehaviour.getType() == BehaviourType.aggressive)
             ChangeBehaviourTo("FollowPath");
     }
     

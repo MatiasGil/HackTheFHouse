@@ -12,6 +12,16 @@ public class PlayerController : MonoBehaviour {
 
 	private bool moving = false;
 
+	private static PlayerController instance;
+	public static PlayerController Instance { get { return instance; }}
+
+	private void Awake()
+	{
+		if (instance == null) {
+			instance = this;
+		}
+	}
+
 	private void Update()
 	{
 		if (Input.GetKeyDown (KeyCode.UpArrow)) {
