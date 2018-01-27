@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Direction
+{
+	up,
+	down,
+	left,
+	right
+}
+
 public class ElectricElement : MonoBehaviour {
 
 	public enum State
@@ -38,14 +46,10 @@ public class ElectricElement : MonoBehaviour {
 	[SerializeField]
 	private bool canAlertGuards;
 
-	[SerializeField]
-	private Relation topRelation;
-	[SerializeField]
-	private Relation botRelation;
-	[SerializeField]
-	private Relation rightRelation;
-	[SerializeField]
-	private Relation leftRelation;
+	public Relation topRelation;
+	public Relation botRelation;
+	public Relation rightRelation;
+	public Relation leftRelation;
 
 	private void Update()
 	{
@@ -76,8 +80,23 @@ public class ElectricElement : MonoBehaviour {
 		}
 	}
 
-	public void PlayerLeft()
+	public void PlayerDeparted(Direction direction)
 	{
+		switch (direction) {
+		case Direction.up:
+			topRelation.linkAnimator.SetTrigger ("moved");
+			break;
+		case Direction.down:
+			botRelation.linkAnimator.SetTrigger ("moved");
+			break;
+		case Direction.left:
+			leftRelation.linkAnimator.SetTrigger ("moved");
+			break;
+		case Direction.right:
+			rightRelation.linkAnimator.SetTrigger ("moved");
+			break;
+		}
+
 		playerIsHere = false;
 
 		if (activeState == State.beingInfected) {
