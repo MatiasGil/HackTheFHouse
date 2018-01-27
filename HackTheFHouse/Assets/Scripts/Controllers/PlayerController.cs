@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour {
 	private void MoveLeft()
 	{
 		if (activeElectricElement.leftRelation.electricElement != null) {
+			Invoke ("ChangePosition", .5f);
+
 			activeElectricElement.PlayerDeparted (Direction.left);
 
 			activeElectricElement = activeElectricElement.leftRelation.electricElement;
@@ -45,6 +47,8 @@ public class PlayerController : MonoBehaviour {
 	private void MoveRight()
 	{
 		if (activeElectricElement.rightRelation.electricElement != null) {
+			Invoke ("ChangePosition", .5f);
+
 			activeElectricElement.PlayerDeparted (Direction.right);
 
 			activeElectricElement = activeElectricElement.rightRelation.electricElement;
@@ -57,6 +61,8 @@ public class PlayerController : MonoBehaviour {
 	private void MoveUp()
 	{
 		if (activeElectricElement.topRelation.electricElement != null) {
+			Invoke ("ChangePosition", .5f);
+
 			activeElectricElement.PlayerDeparted (Direction.up);
 
 			activeElectricElement = activeElectricElement.topRelation.electricElement;
@@ -69,6 +75,8 @@ public class PlayerController : MonoBehaviour {
 	private void MoveDown()
 	{
 		if (activeElectricElement.botRelation.electricElement != null) {
+			Invoke ("ChangePosition", .5f);
+
 			activeElectricElement.PlayerDeparted (Direction.down);
 
 			activeElectricElement = activeElectricElement.botRelation.electricElement;
@@ -76,5 +84,10 @@ public class PlayerController : MonoBehaviour {
 
 			animatorController.SetTrigger ("move");
 		}
+	}
+
+	private void ChangePosition()
+	{
+		transform.position = activeElectricElement.ActualPosition;
 	}
 }

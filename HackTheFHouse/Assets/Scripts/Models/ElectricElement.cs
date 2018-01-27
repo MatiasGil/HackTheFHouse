@@ -51,10 +51,28 @@ public class ElectricElement : MonoBehaviour {
 	public Relation rightRelation;
 	public Relation leftRelation;
 
+	private Color desinfectedColor;
+	private Color infectedColor;
+
+	private SpriteRenderer thisSpriteRenderer;
+
+	private void Awake()
+	{
+		thisSpriteRenderer = GetComponent<SpriteRenderer> ();
+		desinfectedColor = Color.blue;
+		infectedColor = Color.green;
+
+		thisSpriteRenderer.color = desinfectedColor;
+
+		activeState = State.desinfected;
+
+	}
+
 	private void Update()
 	{
 		if (activeState != State.desinfected && activeState != State.infected) {
 			ProcessState ();
+			ProcessAnimation ();
 		}
 	}
 
@@ -106,6 +124,7 @@ public class ElectricElement : MonoBehaviour {
 
 	public void StartInfection()
 	{
+		Debug.Log (string.Format ("ElectricElement name: {0}, started infection", transform.name));
 		if (canAlertGuards) {
 		
 			//TODO: alert
@@ -123,8 +142,10 @@ public class ElectricElement : MonoBehaviour {
 		if (timeLeftToInfect <= 0) {
 			Infected ();	
 		} else {
-			infectPercent = Mathf.FloorToInt(timeLeftToInfect * 100 / infectTimer); 
+			infectPercent = 100 - Mathf.FloorToInt(timeLeftToInfect * 100 / infectTimer); 
 		}
+
+		Debug.Log (string.Format ("ElectricElement name: {0}, has infect percent of: {1}", transform.name, infectPercent));
 	}
 
 	private void ProcessDesinfect()
@@ -132,7 +153,7 @@ public class ElectricElement : MonoBehaviour {
 		timeLeftToInfect += Time.deltaTime;
 
 		if (timeLeftToInfect < infectTimer) {
-			infectPercent = Mathf.FloorToInt(timeLeftToInfect * 100 / infectTimer);
+			infectPercent = 100 -  Mathf.FloorToInt(timeLeftToInfect * 100 / infectTimer);
 		} else {
 			Desinfected ();
 		}
@@ -143,6 +164,7 @@ public class ElectricElement : MonoBehaviour {
 		infectPercent = 100;
 		timeLeftToInfect = 0;
 		activeState = State.infected;
+		thisSpriteRenderer.color = infectedColor;
 	}
 
 	private void Desinfected()
@@ -150,6 +172,12 @@ public class ElectricElement : MonoBehaviour {
 		infectPercent = 0;
 		timeLeftToInfect = infectTimer;
 		activeState = State.desinfected;
+		thisSpriteRenderer.color = desinfectedColor;
+	}
+
+	private void ProcessAnimation()
+	{
+		thisSpriteRenderer.color = Color.Lerp (desinfectedColor, infectedColor, ((float)infectPercent / 100f));
 	}
 
     public void Unplug ()
