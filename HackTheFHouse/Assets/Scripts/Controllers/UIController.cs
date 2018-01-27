@@ -70,4 +70,11 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void GameOver (bool win)
+    {
+        if (win)
+            Debug.Log("Win!");
+        else
+            Debug.Log("Loose!");
+    }
 }
