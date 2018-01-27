@@ -10,8 +10,6 @@ public class UIController : MonoBehaviour
 
     private Animator animator;
     [SerializeField]
-    private float fadeDuration = 1.0f;
-    [SerializeField]
     private Image fade;
 
 
