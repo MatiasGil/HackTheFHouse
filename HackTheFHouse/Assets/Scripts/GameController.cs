@@ -23,6 +23,10 @@ public class GameController : MonoBehaviour
 	public void Play ()
 	{
         SceneManager.LoadScene("Home");
-		
 	}
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }
