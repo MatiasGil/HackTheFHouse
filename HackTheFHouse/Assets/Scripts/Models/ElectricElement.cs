@@ -33,6 +33,9 @@ public class ElectricElement : MonoBehaviour {
 	[SerializeField]
 	private float infectTimer = 2;
 
+	[SerializeField]
+	private float desinfectRatio = 2;
+
 	private float timeLeftToInfect = 2;
 
 	private int infectPercent = 0;
@@ -55,6 +58,7 @@ public class ElectricElement : MonoBehaviour {
 	private Color desinfectedColor;
 	private Color infectedColor;
 	private Color unpluggedColor;
+	private Color completeInfected;
 
 	private SpriteRenderer thisSpriteRenderer;
 
@@ -63,7 +67,8 @@ public class ElectricElement : MonoBehaviour {
 		thisSpriteRenderer = GetComponent<SpriteRenderer> ();
 		desinfectedColor = Color.blue;
 		infectedColor = Color.green;
-		unpluggedColor = Color.red;
+		unpluggedColor = Color.black;
+		completeInfected = Color.red;
 
 		thisSpriteRenderer.color = desinfectedColor;
 
@@ -150,7 +155,7 @@ public class ElectricElement : MonoBehaviour {
 
 	private void ProcessDesinfect()
 	{
-		timeLeftToInfect += Time.deltaTime;
+		timeLeftToInfect += Time.deltaTime * desinfectRatio;
 
 		if (timeLeftToInfect < infectTimer) {
 			infectPercent = 100 -  Mathf.FloorToInt(timeLeftToInfect * 100 / infectTimer);
@@ -164,7 +169,8 @@ public class ElectricElement : MonoBehaviour {
 		infectPercent = 100;
 		timeLeftToInfect = 0;
 		activeState = State.infected;
-		thisSpriteRenderer.color = infectedColor;
+		Debug.Log ("infectado");
+		thisSpriteRenderer.color = completeInfected;
 	}
 
 	private void Desinfected()
@@ -186,5 +192,7 @@ public class ElectricElement : MonoBehaviour {
 		infectPercent = 0;
 		timeLeftToInfect = infectTimer;
 		thisSpriteRenderer.color = unpluggedColor;
+		UIController.Instance.GameOver (false);
+		Time.timeScale = .1f;
     }
 }

@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour {
 		if (activeElectricElement.leftRelation.electricElement != null) {
 			moving = true;
 			Invoke ("ChangePosition", .5f);
-			Invoke ("EnableMoving", 1f);
+			Invoke ("EnableMoving", .8f);
 			activeElectricElement.PlayerDeparted (Direction.left);
 			activeElectricElement = activeElectricElement.leftRelation.electricElement;
 			animatorController.SetTrigger ("move");
@@ -103,7 +103,8 @@ public class PlayerController : MonoBehaviour {
 
 	private void ChangePosition()
 	{
-		transform.position = activeElectricElement.ActualPosition;
+		Vector3 targetPosition = activeElectricElement.ActualPosition;
+		transform.position = new Vector3 (targetPosition.x, targetPosition.y, transform.position.z);
 		activeElectricElement.PlayerArrived ();
 	}
 
