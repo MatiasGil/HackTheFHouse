@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.LeftArrow)) {
 				MoveLeft ();
 			}
+		} else {
+			AudioController.Instance.PlaySFX ("Error");
 		}
 	}
 
@@ -58,6 +60,7 @@ public class PlayerController : MonoBehaviour {
 			return;
 
 		if (activeElectricElement.leftRelation.electricElement != null) {
+			AudioController.Instance.PlaySFX ("Movimiento");
 			moving = true;
 			Invoke ("ChangePosition", .25f);
 			Invoke ("EnableMoving", .38f);
@@ -73,6 +76,7 @@ public class PlayerController : MonoBehaviour {
 			return;
 
 		if (activeElectricElement.rightRelation.electricElement != null) {
+			AudioController.Instance.PlaySFX ("Movimiento");
 			moving = true;
 			Invoke ("ChangePosition", .25f);
 			Invoke ("EnableMoving", .38f);
@@ -88,6 +92,7 @@ public class PlayerController : MonoBehaviour {
 			return;
 
 		if (activeElectricElement.topRelation.electricElement != null) {
+			AudioController.Instance.PlaySFX ("Movimiento");
 			moving = true;
 			Invoke ("ChangePosition", .25f);
 			Invoke ("EnableMoving", .38f);
@@ -103,6 +108,7 @@ public class PlayerController : MonoBehaviour {
 			return;
 
 		if (activeElectricElement.botRelation.electricElement != null) {
+			AudioController.Instance.PlaySFX ("Movimiento");
 			moving = true;
 			Invoke ("ChangePosition", .25f);
 			Invoke ("EnableMoving", .38f);

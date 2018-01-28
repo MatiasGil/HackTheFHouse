@@ -143,7 +143,7 @@ public class ElectricElement : MonoBehaviour {
 
 	public void PlayerDeparted(Direction direction)
 	{
-		/*
+
 		switch (direction) {
 		case Direction.up:
 			topRelation.linkAnimator.RunAnimation();
@@ -158,7 +158,9 @@ public class ElectricElement : MonoBehaviour {
 			rightRelation.linkAnimator.RunAnimation();
                 break;
 		}
-		*/
+
+
+		AudioController.Instance.PlaySFX ("desinfection");
 
 		playerIsHere = false;
 
@@ -179,6 +181,8 @@ public class ElectricElement : MonoBehaviour {
 				eventAlertGuards (this, true);
 			}
 		}
+
+		AudioController.Instance.PlaySFX ("infection");
 
 		EnableInfectionBar (infectTimer);
 
@@ -222,6 +226,8 @@ public class ElectricElement : MonoBehaviour {
 			}
 		}
 
+		AudioController.Instance.PlaySFX ("infectCompleted");
+
 		if (isTheLastOne) {
 		
 			GameController.Instance.LevelFinished ();
@@ -232,6 +238,7 @@ public class ElectricElement : MonoBehaviour {
 
 	private void Desinfected()
 	{
+		AudioController.instance.StopSFX ();
 		infectPercent = 0;
 		timeLeftToInfect = infectTimer;
 		activeState = State.desinfected;

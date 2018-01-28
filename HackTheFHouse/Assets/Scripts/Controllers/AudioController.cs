@@ -13,12 +13,20 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     private AudioSource audioLoop;
 
+	[SerializeField]
+	private AudioSource audioSourceSFX;
+
     [SerializeField]
     private AudioClip mainMenuMusic;
     [SerializeField]
     private AudioClip gameMusicIntro;
     [SerializeField]
     private AudioClip gameMusic;
+
+	[SerializeField]
+	private List<AudioClip> audioClipsSFX;
+
+	private Dictionary<string, AudioClip> audioSFXMap = new Dictionary<string, AudioClip>();
 
     private int audioState = 1;
 
@@ -33,6 +41,10 @@ public class AudioController : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         audioSource = GetComponent<AudioSource>();
+
+		foreach (AudioClip clip in audioClipsSFX) {
+			audioSFXMap.Add (clip.name, clip);
+		}
     }
 
     private void Start()
@@ -68,6 +80,19 @@ public class AudioController : MonoBehaviour
         audioSource.Play();
         StartCoroutine(IntroAndContinue());
     }
+
+	public void PlaySFX(string name, bool changeTimer = false, float Timer = 1)
+	{
+		audioSourceSFX.Stop ();
+		if (audioSFXMap.ContainsKey (name)) {
+			audioSourceSFX.clip = audioSFXMap [name];
+		}
+	}
+
+	public void StopSFX()
+	{
+		audioSourceSFX.Stop ();
+	}
 
     private IEnumerator IntroAndContinue()
     {
