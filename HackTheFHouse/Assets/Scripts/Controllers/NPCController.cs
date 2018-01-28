@@ -37,6 +37,26 @@ public class NPCController : MonoBehaviour {
 	private void Update()
 	{
 		activeBehaviour.OnUpdate ();
+
+		Vector2 actualSpeed = activeBehaviour.getActiveSpeed ();
+
+		if (actualSpeed.x > actualSpeed.y) {
+			if (actualSpeed.x > 0) {
+				animatorController.SetInteger ("x", 1);
+			} else {
+				animatorController.SetInteger ("x", -1);
+			}
+
+			animatorController.SetInteger ("y", 0);
+		} else {
+			if (actualSpeed.y > 0) {
+				animatorController.SetInteger ("y", 1);
+			} else {
+				animatorController.SetInteger ("y", -1);
+			}
+
+			animatorController.SetInteger ("x", 0);
+		}
 	}
 
 	private void ChangeBehaviourTo(string behaviourId, ElectricElement electricElement = null)

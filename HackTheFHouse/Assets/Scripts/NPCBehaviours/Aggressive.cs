@@ -43,7 +43,7 @@ public class Aggressive : MonoBehaviour, iNPCBehaviour
     {
         alert = true;
         BestPoint();
-        LookAtPoint();
+        //LookAtPoint();
     }
 
     public void OnUpdate()
@@ -69,7 +69,7 @@ public class Aggressive : MonoBehaviour, iNPCBehaviour
                 else
                     IsDone();
             }
-            LookAtPoint();
+            //LookAtPoint();
         }
     }
 
@@ -92,10 +92,12 @@ public class Aggressive : MonoBehaviour, iNPCBehaviour
         }
     }
 
+	/*
     private void LookAtPoint()
     {
         npcTransform.right = points[currentTargetPoint].position - npcTransform.position;
     }
+    */
 
     public string getName()
     {

@@ -39,7 +39,7 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
 	public void OnEnter()
 	{
         BestPoint();
-        LookAtPoint();
+        //LookAtPoint();
     }
 
     public void OnUpdate()
@@ -52,7 +52,7 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
                 currentTargetPoint = 0;
             else
                 currentTargetPoint++;
-            LookAtPoint();
+            //LookAtPoint();
         }       
     }
 
@@ -75,10 +75,12 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
         }
     }
 
+	/*
     private void LookAtPoint()
     {
         npcTransform.right = points[currentTargetPoint].position - npcTransform.position;
     }
+	*/
 
 	public string getName()
 	{
