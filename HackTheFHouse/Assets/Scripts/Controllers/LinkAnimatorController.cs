@@ -5,15 +5,18 @@ using UnityEngine;
 public class LinkAnimatorController : MonoBehaviour 
 {
     [SerializeField]
-    private Animator[] animators;
+    private List<Animator> animators = new List<Animator>();
+
+
+    private void Awake()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+            animators.Add(transform.GetChild(i).GetComponent<Animator>());
+    }
 
     public void RunAnimation()
     {
-        for (int i = 0; i < animators.Length; i++)
-        {
-            // TODO: correr animaciones de todos los links
+        //for (int i = 0; i < animators.Count; i++)
             //animators[i].Play();
-        }
     }
-
 }
