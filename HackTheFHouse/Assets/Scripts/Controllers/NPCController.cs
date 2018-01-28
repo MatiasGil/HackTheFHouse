@@ -61,13 +61,15 @@ public class NPCController : MonoBehaviour {
         if (collision.tag == "ElectricElement")
         {
 			ElectricElement targetElectricElement = collision.GetComponent<ElectricElement> ();
-			if (targetElectricElement.activeState == ElectricElement.State.beingInfected) {
-				if (activeBehaviour.getType () != BehaviourType.aggressive) {
-					ChangeBehaviourTo (string.Format ("Aggressive_{0}", targetElectricElement.name), targetElectricElement);
-				}
-			} else if (targetElectricElement.activeState == ElectricElement.State.beingDesinfected || targetElectricElement.activeState == ElectricElement.State.infected) {
-				if (activeBehaviour.getType () == BehaviourType.aggressive) {
-					ChangeBehaviourTo ("FollowPath");
+			if (targetElectricElement != null) {
+				if (targetElectricElement.activeState == ElectricElement.State.beingInfected) {
+					if (activeBehaviour.getType () != BehaviourType.aggressive) {
+						ChangeBehaviourTo (string.Format ("Aggressive_{0}", targetElectricElement.name), targetElectricElement);
+					}
+				} else if (targetElectricElement.activeState == ElectricElement.State.beingDesinfected || targetElectricElement.activeState == ElectricElement.State.infected) {
+					if (activeBehaviour.getType () == BehaviourType.aggressive) {
+						ChangeBehaviourTo ("FollowPath");
+					}
 				}
 			}
         }   

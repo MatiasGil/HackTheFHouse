@@ -76,6 +76,11 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+	public void StartLevel()
+	{
+		PlayerController.Instance.StartGame ();
+	}
+
 	public void LevelFinished()
 	{
 		notInfectedElectricElements.Clear ();

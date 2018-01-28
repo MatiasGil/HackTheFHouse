@@ -41,6 +41,12 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void StartGame()
+	{
+		animatorController.SetTrigger ("startgame");
+		Invoke ("ChangePosition", .25f);
+	}
+
 	private void MoveLeft()
 	{
 		if (moving)
