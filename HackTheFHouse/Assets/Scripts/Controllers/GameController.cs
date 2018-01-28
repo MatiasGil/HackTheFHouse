@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
 	public void Play ()
 	{
         StartCoroutine(UIController.instance.Fade(false));
-        SceneManager.LoadScene("Home");
+        SceneManager.LoadScene("Tutorial");
         StartCoroutine(UIController.instance.Fade(true));
         AudioController.instance.GameMusicIntro();
     }

@@ -45,10 +45,13 @@ public class NPCController : MonoBehaviour {
 		if (allBehaviours.TryGetValue (behaviourId, out targetBehaviuor))
         {
 			activeBehaviour = targetBehaviuor;
-			activeBehaviour.OnEnter ();
+			activeBehaviour.OnEnter();
 
-			if (activeBehaviour.getType() == BehaviourType.aggressive)
+            if (activeBehaviour.getType() == BehaviourType.aggressive)
+            {
                 activeBehaviour.SetTarget(electricElement);
+            }
+            
         }
         else
         {
