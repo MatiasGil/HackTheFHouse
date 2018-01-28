@@ -93,10 +93,19 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
     private void LookAtPoint()
     {
         viewCone.right = points[currentTargetPoint].position - npcTransform.position;
-        //viewCone.right = points[currentTargetPoint].position - viewCone.position;
 
-        
-        Debug.Log(viewCone.right = points[currentTargetPoint].position - viewCone.position);
+
+        Quaternion q = Quaternion.LookRotation(viewCone.position - points[currentTargetPoint].position, Vector3.forward);
+        q.y = 0;
+        q.x = 0;
+        //q.z += 180;
+
+
+
+        viewCone.rotation = q;
+
+
+
     }
 	
 
