@@ -567,6 +567,21 @@ Prefab:
       propertyPath: right
       value: 
       objectReference: {fileID: 242898732}
+    - target: {fileID: 20010031659303824, guid: e46883f26f814e54b9007035b862cecb,
+        type: 2}
+      propertyPath: m_BackGroundColor.r
+      value: 0.22794116
+      objectReference: {fileID: 0}
+    - target: {fileID: 20010031659303824, guid: e46883f26f814e54b9007035b862cecb,
+        type: 2}
+      propertyPath: m_BackGroundColor.g
+      value: 0.22794116
+      objectReference: {fileID: 0}
+    - target: {fileID: 20010031659303824, guid: e46883f26f814e54b9007035b862cecb,
+        type: 2}
+      propertyPath: m_BackGroundColor.b
+      value: 0.22794116
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e46883f26f814e54b9007035b862cecb, type: 2}
   m_IsPrefabParent: 0
@@ -6988,6 +7003,11 @@ Prefab:
         type: 2}
       propertyPath: infectTimer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114710281802722218, guid: 2991f9889f9e346d4ad45bac0a16b89f,
+        type: 2}
+      propertyPath: isTheLastOne
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2991f9889f9e346d4ad45bac0a16b89f, type: 2}
