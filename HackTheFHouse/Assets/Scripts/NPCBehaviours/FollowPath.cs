@@ -53,7 +53,7 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
             else
                 currentTargetPoint++;
             LookAtPoint();
-        }        
+        }       
     }
 
     private void BestPoint()
