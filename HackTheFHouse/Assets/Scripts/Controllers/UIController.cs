@@ -13,11 +13,11 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Image fade;
 
+	[SerializeField]
+	private GameObject startLevelBack;
+
     [SerializeField]
     public Button startLevel;
-
-	[SerializeField]
-	private Slider infectionBar;
 
     private void Awake()
     {
@@ -78,6 +78,7 @@ public class UIController : MonoBehaviour
 
     public void StartLevelButton()
     {
+		startLevelBack.gameObject.SetActive (false);
         startLevel.gameObject.SetActive(false);
         GameController.Instance.StartLevel();
     }
@@ -95,6 +96,7 @@ public class UIController : MonoBehaviour
         if (scene.name == "Tutorial")
         {
             startLevel.gameObject.SetActive(true);
+			startLevelBack.gameObject.SetActive (true);
         }
     }
 }

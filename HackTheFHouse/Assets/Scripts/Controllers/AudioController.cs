@@ -14,7 +14,7 @@ public class AudioController : MonoBehaviour
     private AudioSource audioLoop;
 
 	[SerializeField]
-	private AudioSource audioSourceSFX;
+	private GameObject audioSourceSFXPrefab;
 
     [SerializeField]
     private AudioClip mainMenuMusic;
@@ -83,15 +83,29 @@ public class AudioController : MonoBehaviour
 
 	public void PlaySFX(string name, bool changeTimer = false, float Timer = 1)
 	{
-		audioSourceSFX.Stop ();
+		Debug.Log (name);
 		if (audioSFXMap.ContainsKey (name)) {
-			audioSourceSFX.clip = audioSFXMap [name];
+			StartCoroutine (PlaySFXCoroutine (audioSFXMap[name], changeTimer, Timer));
 		}
 	}
 
 	public void StopSFX()
 	{
-		audioSourceSFX.Stop ();
+		
+	}
+
+	private IEnumerator PlaySFXCoroutine(AudioClip audioClip, bool changeTimer = false, float Timer = 1)
+	{
+		GameObject audioSourceObject = Instantiate(audioSourceSFXPrefab) as GameObject;
+		audioSourceObject.transform.SetParent (this.transform);
+		AudioSource thisAudioSource = audioSourceObject.GetComponent<AudioSource> ();
+		thisAudioSource.clip = audioClip;
+		thisAudioSource.Play ();
+
+		yield return new WaitForSeconds (audioClip.length);
+
+		thisAudioSource.Stop ();
+		Destroy (audioSourceObject);
 	}
 
     private IEnumerator IntroAndContinue()

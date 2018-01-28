@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
 	private Dictionary<string, ElectricElement> notInfectedElectricElements = new Dictionary<string, ElectricElement>();
 	private Dictionary<string, ElectricElement> infectedElectricElements = new Dictionary<string, ElectricElement>();
 
+	public bool Playing = false;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -78,11 +80,13 @@ public class GameController : MonoBehaviour
 
 	public void StartLevel()
 	{
+		Playing = true;
 		PlayerController.Instance.StartGame ();
 	}
 
 	public void LevelFinished()
 	{
+		Playing = false;
 		notInfectedElectricElements.Clear ();
 		infectedElectricElements.Clear ();
 		readyToNextLevel = false;

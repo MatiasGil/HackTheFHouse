@@ -26,24 +26,39 @@ public class PlayerController : MonoBehaviour {
 
 	private void Update()
 	{
-		if (canMove) {
-			if (Input.GetKeyDown (KeyCode.UpArrow)) {
+		if (!GameController.Instance.Playing)
+			return;
+		
+		if (Input.GetKeyDown (KeyCode.UpArrow)) {
+			if (!canMove) {
+				AudioController.Instance.PlaySFX ("Error");
+			} else {
 				MoveUp ();
 			}
-			
-			if (Input.GetKeyDown (KeyCode.DownArrow)) {
+		}
+		
+		if (Input.GetKeyDown (KeyCode.DownArrow)) {
+			if (!canMove) {
+				AudioController.Instance.PlaySFX ("Error");
+			} else {
 				MoveDown ();
 			}
-			
-			if (Input.GetKeyDown (KeyCode.RightArrow)) {
+		}
+		
+		if (Input.GetKeyDown (KeyCode.RightArrow)) {
+			if (!canMove) {
+				AudioController.Instance.PlaySFX ("Error");
+			} else {
 				MoveRight ();
 			}
-			
-			if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+		}
+		
+		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+			if (!canMove) {
+				AudioController.Instance.PlaySFX ("Error");
+			} else {
 				MoveLeft ();
 			}
-		} else {
-			AudioController.Instance.PlaySFX ("Error");
 		}
 	}
 

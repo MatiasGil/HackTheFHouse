@@ -159,9 +159,6 @@ public class ElectricElement : MonoBehaviour {
                 break;
 		}
 
-
-		AudioController.Instance.PlaySFX ("desinfection");
-
 		playerIsHere = false;
 
 		if (activeState == State.beingInfected) {
