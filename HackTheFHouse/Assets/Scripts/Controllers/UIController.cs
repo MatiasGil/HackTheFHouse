@@ -70,22 +70,6 @@ public class UIController : MonoBehaviour
         }
     }
 
-	public void EnableInfectionBar(float totalSeconds)
-	{
-		infectionBar.GetComponent<RectTransform> ().sizeDelta = new Vector2(100 + (20 * totalSeconds), 30);
-		infectionBar.gameObject.SetActive (true);
-	}
-
-	public void UpdateInfectionBar(int percent)
-	{
-		infectionBar.value = (100 - percent);
-	}
-
-	public void DisableInfectionBar()
-	{
-		infectionBar.gameObject.SetActive (false);
-	}
-
     public void GameOver (bool win)
     {
         if (win)

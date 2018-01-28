@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Direction
 {
@@ -52,6 +53,9 @@ public class ElectricElement : MonoBehaviour {
 
 	[SerializeField]
 	private GameObject alertGuardsImage;
+
+	[SerializeField]
+	private Slider infectionBar;
 
 	public Relation topRelation;
 	public Relation botRelation;
@@ -152,7 +156,7 @@ public class ElectricElement : MonoBehaviour {
 			}
 		}
 
-		UIController.Instance.EnableInfectionBar (infectTimer);
+		EnableInfectionBar (infectTimer);
 
 		timeLeftToInfect = infectTimer - (infectTimer * infectPercent / 100);
 
@@ -167,7 +171,6 @@ public class ElectricElement : MonoBehaviour {
 			Infected ();	
 		} else {
 			infectPercent = 100 - Mathf.FloorToInt(timeLeftToInfect * 100 / infectTimer); 
-			UIController.Instance.UpdateInfectionBar (infectPercent);
 		}
 	}
 
@@ -188,7 +191,7 @@ public class ElectricElement : MonoBehaviour {
 		timeLeftToInfect = 0;
 		activeState = State.infected;
 		thisSpriteRenderer.color = completeInfected;
-		UIController.Instance.DisableInfectionBar ();
+		DisableInfectionBar ();
 		if (canAlertGuards) {
 			if (eventAlertGuards != null) {
 				eventAlertGuards (this, false);
@@ -201,11 +204,13 @@ public class ElectricElement : MonoBehaviour {
 		infectPercent = 0;
 		timeLeftToInfect = infectTimer;
 		activeState = State.desinfected;
+		DisableInfectionBar ();
 		thisSpriteRenderer.color = desinfectedColor;
 	}
 
 	private void ProcessAnimation()
 	{
+		UpdateInfectionBar (infectPercent);
 		thisSpriteRenderer.color = Color.Lerp (desinfectedColor, infectedColor, ((float)infectPercent / 100f));
 	}
 
@@ -223,4 +228,20 @@ public class ElectricElement : MonoBehaviour {
 		Time.timeScale = .1f;
 		//TODO: end game
     }
+
+	public void EnableInfectionBar(float totalSeconds)
+	{
+		infectionBar.GetComponent<RectTransform> ().sizeDelta = new Vector2(100 + (20 * totalSeconds), 30);
+		infectionBar.gameObject.SetActive (true);
+	}
+
+	public void UpdateInfectionBar(int percent)
+	{
+		infectionBar.value = (100 - percent);
+	}
+
+	public void DisableInfectionBar()
+	{
+		infectionBar.gameObject.SetActive (false);
+	}
 }
