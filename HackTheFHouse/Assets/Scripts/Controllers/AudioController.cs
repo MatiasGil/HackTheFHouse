@@ -7,14 +7,20 @@ public class AudioController : MonoBehaviour
 {
     public static AudioController instance;
     public static AudioController Instance { get { return instance; } }
-    
+
     [SerializeField]
     private AudioSource audioSource;
     [SerializeField]
     private AudioSource audioLoop;
 
-	[SerializeField]
-	private GameObject audioSourceSFXPrefab;
+    [SerializeField]
+    private AudioSource audioError;
+
+    [SerializeField]
+    private AudioSource audioInfectar;
+
+    [SerializeField]
+    private AudioSource audioMover;
 
     [SerializeField]
     private AudioClip mainMenuMusic;
@@ -85,15 +91,39 @@ public class AudioController : MonoBehaviour
 	{
 		Debug.Log (name);
 		if (audioSFXMap.ContainsKey (name)) {
-			StartCoroutine (PlaySFXCoroutine (audioSFXMap[name], changeTimer, Timer));
+            switch (name)
+            {
+                case "Error":
+                    audioError.Play();
+                    break;
+                case "Movimiento":
+                    audioMover.Play();
+                    break;
+                case "infection":
+                    audioInfectar.Play();
+                    break;
+            }
+			//StartCoroutine (PlaySFXCoroutine (audioSFXMap[name], changeTimer, Timer));
 		}
 	}
 
-	public void StopSFX()
+	public void StopSFX(string name)
 	{
-		
-	}
+        switch (name)
+        {
+            case "Error":
+                audioError.Stop();
+                break;
+            case "Movimiento":
+                audioMover.Stop();
+                break;
+            case "infection":
+                audioInfectar.Stop();
+                break;
+        }
+    }
 
+    /*
 	private IEnumerator PlaySFXCoroutine(AudioClip audioClip, bool changeTimer = false, float Timer = 1)
 	{
 		GameObject audioSourceObject = Instantiate(audioSourceSFXPrefab) as GameObject;
@@ -107,6 +137,7 @@ public class AudioController : MonoBehaviour
 		thisAudioSource.Stop ();
 		Destroy (audioSourceObject);
 	}
+    */
 
     private IEnumerator IntroAndContinue()
     {

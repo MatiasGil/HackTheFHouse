@@ -143,7 +143,7 @@ public class ElectricElement : MonoBehaviour {
 
 	public void PlayerDeparted(Direction direction)
 	{
-
+        AudioController.Instance.StopSFX("infection");
 		switch (direction) {
 		case Direction.up:
 			topRelation.linkAnimator.RunAnimation();
@@ -235,7 +235,6 @@ public class ElectricElement : MonoBehaviour {
 
 	private void Desinfected()
 	{
-		AudioController.instance.StopSFX ();
 		infectPercent = 0;
 		timeLeftToInfect = infectTimer;
 		activeState = State.desinfected;
