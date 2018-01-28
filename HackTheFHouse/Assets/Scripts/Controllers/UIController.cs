@@ -30,22 +30,22 @@ public class UIController : MonoBehaviour
 
     public void ButtonPlay()
     {
-        GameController.instance.Play();
+        GameController.Instance.Play();
     }
 
     public void ButtonExit()
     {
-        GameController.instance.Exit();
+        GameController.Instance.Exit();
     }
 
     public void ButtonMainMenu()
     {
-        GameController.instance.MainMenu();
+        GameController.Instance.MainMenu();
     }
 
     public void ButtonCredits()
     {
-        GameController.instance.Credits();
+        GameController.Instance.Credits();
     }
 
     public IEnumerator Fade(bool fadeAway)

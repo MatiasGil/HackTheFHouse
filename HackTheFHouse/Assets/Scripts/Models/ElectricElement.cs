@@ -52,10 +52,16 @@ public class ElectricElement : MonoBehaviour {
 	private bool canAlertGuards;
 
 	[SerializeField]
+	private bool isTheLastOne;
+
+	[SerializeField]
 	private GameObject alertGuardsImage;
 
 	[SerializeField]
 	private Slider infectionBar;
+
+	[SerializeField]
+	private GameObject blockedSprite;
 
 	public Relation topRelation;
 	public Relation botRelation;
@@ -86,8 +92,17 @@ public class ElectricElement : MonoBehaviour {
 
 		activeState = State.desinfected;
 
+		if (isTheLastOne) {
+			blockedSprite.SetActive (true);
+		}
+
 		if(canAlertGuards)
 			alertGuardsImage.SetActive (true);
+	}
+
+	private void Start()
+	{
+		GameController.Instance.AddElectricElementToDB (this);
 	}
 
 	private void Update()
@@ -116,12 +131,19 @@ public class ElectricElement : MonoBehaviour {
 		playerIsHere = true;
 
 		if (activeState != State.infected) {
-			StartInfection ();
+			if (isTheLastOne) {
+				if (GameController.Instance.readyToNextLevel) {
+					StartInfection ();
+				}
+			} else {
+				StartInfection ();
+			}
 		}
 	}
 
 	public void PlayerDeparted(Direction direction)
 	{
+		/*
 		switch (direction) {
 		case Direction.up:
 			topRelation.linkAnimator.RunAnimation();
@@ -136,6 +158,7 @@ public class ElectricElement : MonoBehaviour {
 			rightRelation.linkAnimator.RunAnimation();
                 break;
 		}
+		*/
 
 		playerIsHere = false;
 
@@ -198,6 +221,13 @@ public class ElectricElement : MonoBehaviour {
 				eventAlertGuards (this, false);
 			}
 		}
+
+		if (isTheLastOne) {
+		
+			GameController.Instance.LevelFinished ();
+		}
+
+		GameController.Instance.ElectricElementInfected (this);
 	}
 
 	private void Desinfected()
@@ -227,7 +257,8 @@ public class ElectricElement : MonoBehaviour {
 		thisSpriteRenderer.color = unpluggedColor;
 		UIController.Instance.GameOver (false);
 		Time.timeScale = .1f;
-		//TODO: end game
+
+		//TODO: lost
     }
 
 	public void EnableInfectionBar(float totalSeconds)
@@ -244,5 +275,12 @@ public class ElectricElement : MonoBehaviour {
 	public void DisableInfectionBar()
 	{
 		infectionBar.gameObject.SetActive (false);
+	}
+
+	public void ReadyToBeInfected()
+	{
+		if (isTheLastOne) {
+			blockedSprite.SetActive (false);
+		}
 	}
 }
