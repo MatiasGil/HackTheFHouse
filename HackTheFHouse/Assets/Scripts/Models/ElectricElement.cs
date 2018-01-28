@@ -73,6 +73,7 @@ public class ElectricElement : MonoBehaviour {
 	public event AlertGuardsDelegate eventAlertGuards;
 
 
+
 	private void Awake()
 	{
 		thisSpriteRenderer = GetComponent<SpriteRenderer> ();

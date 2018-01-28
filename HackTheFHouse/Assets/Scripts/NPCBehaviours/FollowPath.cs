@@ -22,6 +22,11 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
     [SerializeField]
 	private float threshold;
 
+
+	float lastFrameXPos;
+	float lastFrameYPos;
+
+
 	private BehaviourType @type;
 
 	public void Init(Transform npcTrasform, NPCController npcController)
@@ -93,5 +98,10 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
 	public BehaviourType getType()
 	{
 		return @type;
+	}
+
+	public Vector2 getActiveSpeed()
+	{
+		return new Vector2 (transform.position.x - lastFrameXPos, transform.position.y - lastFrameYPos);
 	}
 }

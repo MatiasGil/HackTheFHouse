@@ -17,4 +17,5 @@ public interface iNPCBehaviour {
     void SetTarget(ElectricElement electricElement);
     void IsDone();
 	BehaviourType getType();
+	Vector2 getActiveSpeed ();
 }
