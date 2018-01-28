@@ -79,5 +79,17 @@ public class NPCController : MonoBehaviour {
 		if (activeBehaviour.getType() == BehaviourType.aggressive)
             ChangeBehaviourTo("FollowPath");
     }
-    
+
+	public void ElectronicElementAlert(ElectricElement electronicElement, bool infecting)
+	{
+		if (infecting) {
+			if (activeBehaviour.getType () != BehaviourType.aggressive) {
+				ChangeBehaviourTo (string.Format ("Aggressive_{0}", electronicElement.name), electronicElement);
+			}
+		} else {
+			if (activeBehaviour.getType () != BehaviourType.pasive) {
+				ChangeBehaviourTo ("FollowPath");
+			}
+		}
+	}
 }

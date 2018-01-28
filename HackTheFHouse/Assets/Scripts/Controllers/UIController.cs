@@ -12,6 +12,8 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Image fade;
 
+	[SerializeField]
+	private Slider infectionBar;
 
     private void Awake()
     {
@@ -67,6 +69,22 @@ public class UIController : MonoBehaviour
             fade.raycastTarget = false;
         }
     }
+
+	public void EnableInfectionBar(float totalSeconds)
+	{
+		infectionBar.GetComponent<RectTransform> ().sizeDelta = new Vector2(100 + (20 * totalSeconds), 30);
+		infectionBar.gameObject.SetActive (true);
+	}
+
+	public void UpdateInfectionBar(int percent)
+	{
+		infectionBar.value = (100 - percent);
+	}
+
+	public void DisableInfectionBar()
+	{
+		infectionBar.gameObject.SetActive (false);
+	}
 
     public void GameOver (bool win)
     {

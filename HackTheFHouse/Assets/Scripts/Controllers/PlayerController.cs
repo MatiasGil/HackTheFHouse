@@ -48,8 +48,8 @@ public class PlayerController : MonoBehaviour {
 
 		if (activeElectricElement.leftRelation.electricElement != null) {
 			moving = true;
-			Invoke ("ChangePosition", .5f);
-			Invoke ("EnableMoving", .8f);
+			Invoke ("ChangePosition", .25f);
+			Invoke ("EnableMoving", .38f);
 			activeElectricElement.PlayerDeparted (Direction.left);
 			activeElectricElement = activeElectricElement.leftRelation.electricElement;
 			animatorController.SetTrigger ("move");
@@ -63,8 +63,8 @@ public class PlayerController : MonoBehaviour {
 
 		if (activeElectricElement.rightRelation.electricElement != null) {
 			moving = true;
-			Invoke ("ChangePosition", .5f);
-			Invoke ("EnableMoving", 1f);
+			Invoke ("ChangePosition", .25f);
+			Invoke ("EnableMoving", .38f);
 			activeElectricElement.PlayerDeparted (Direction.right);
 			activeElectricElement = activeElectricElement.rightRelation.electricElement;
 			animatorController.SetTrigger ("move");
@@ -78,8 +78,8 @@ public class PlayerController : MonoBehaviour {
 
 		if (activeElectricElement.topRelation.electricElement != null) {
 			moving = true;
-			Invoke ("ChangePosition", .5f);
-			Invoke ("EnableMoving", 1f);
+			Invoke ("ChangePosition", .25f);
+			Invoke ("EnableMoving", .38f);
 			activeElectricElement.PlayerDeparted (Direction.up);
 			activeElectricElement = activeElectricElement.topRelation.electricElement;
 			animatorController.SetTrigger ("move");
@@ -93,8 +93,8 @@ public class PlayerController : MonoBehaviour {
 
 		if (activeElectricElement.botRelation.electricElement != null) {
 			moving = true;
-			Invoke ("ChangePosition", .5f);
-			Invoke ("EnableMoving", 1f);
+			Invoke ("ChangePosition", .25f);
+			Invoke ("EnableMoving", .38f);
 			activeElectricElement.PlayerDeparted (Direction.down);
 			activeElectricElement = activeElectricElement.botRelation.electricElement;
 			animatorController.SetTrigger ("move");

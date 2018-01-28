@@ -50,6 +50,9 @@ public class ElectricElement : MonoBehaviour {
 	[SerializeField]
 	private bool canAlertGuards;
 
+	[SerializeField]
+	private GameObject alertGuardsImage;
+
 	public Relation topRelation;
 	public Relation botRelation;
 	public Relation rightRelation;
@@ -61,6 +64,10 @@ public class ElectricElement : MonoBehaviour {
 	private Color completeInfected;
 
 	private SpriteRenderer thisSpriteRenderer;
+
+	public delegate void AlertGuardsDelegate(ElectricElement electricElement, bool infecting);
+	public event AlertGuardsDelegate eventAlertGuards;
+
 
 	private void Awake()
 	{
@@ -74,13 +81,15 @@ public class ElectricElement : MonoBehaviour {
 
 		activeState = State.desinfected;
 
+		if(canAlertGuards)
+			alertGuardsImage.SetActive (true);
 	}
 
 	private void Update()
 	{
 		if (activeState == State.beingInfected || activeState == State.beingDesinfected) {
-			ProcessState ();
 			ProcessAnimation ();
+			ProcessState ();
 		}
 	}
 
@@ -126,6 +135,11 @@ public class ElectricElement : MonoBehaviour {
 		playerIsHere = false;
 
 		if (activeState == State.beingInfected) {
+			if (canAlertGuards) {
+				if (eventAlertGuards != null) {
+					eventAlertGuards (this, false);
+				}
+			}
 			activeState = State.beingDesinfected;
 		}
 	}
@@ -133,9 +147,12 @@ public class ElectricElement : MonoBehaviour {
 	public void StartInfection()
 	{
 		if (canAlertGuards) {
-		
-			//TODO: alert
+			if (eventAlertGuards != null) {
+				eventAlertGuards (this, true);
+			}
 		}
+
+		UIController.Instance.EnableInfectionBar (infectTimer);
 
 		timeLeftToInfect = infectTimer - (infectTimer * infectPercent / 100);
 
@@ -150,6 +167,7 @@ public class ElectricElement : MonoBehaviour {
 			Infected ();	
 		} else {
 			infectPercent = 100 - Mathf.FloorToInt(timeLeftToInfect * 100 / infectTimer); 
+			UIController.Instance.UpdateInfectionBar (infectPercent);
 		}
 	}
 
@@ -169,8 +187,13 @@ public class ElectricElement : MonoBehaviour {
 		infectPercent = 100;
 		timeLeftToInfect = 0;
 		activeState = State.infected;
-		Debug.Log ("infectado");
 		thisSpriteRenderer.color = completeInfected;
+		UIController.Instance.DisableInfectionBar ();
+		if (canAlertGuards) {
+			if (eventAlertGuards != null) {
+				eventAlertGuards (this, false);
+			}
+		}
 	}
 
 	private void Desinfected()
@@ -188,11 +211,16 @@ public class ElectricElement : MonoBehaviour {
 
     public void Unplug ()
     {
+		if (!playerIsHere) {
+			return;
+		}
+
 		activeState = State.unpluged;
 		infectPercent = 0;
 		timeLeftToInfect = infectTimer;
 		thisSpriteRenderer.color = unpluggedColor;
 		UIController.Instance.GameOver (false);
 		Time.timeScale = .1f;
+		//TODO: end game
     }
 }
