@@ -15,6 +15,7 @@ public class AudioController : MonoBehaviour
     [SerializeField]
     private AudioClip gameMusic;
 
+    private int audioState = 1;
 
     private void Awake()
     {
@@ -35,8 +36,35 @@ public class AudioController : MonoBehaviour
         audioSource.Play();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.J))
+        {
+            audioState = 2;
+        }
+
+        if (audioState == 2 && audioSource.volume > 0)
+            audioSource.volume -= 1 * Time.deltaTime;
+
+        if (audioState == 2 && audioSource.volume <= 0)
+        {
+            //GameMusic();
+            audioState = 3;
+        }
+
+        if (audioState == 3 && audioSource.volume <= 1)
+            audioSource.volume += 1 * Time.deltaTime;
+
+        if (audioState == 3 && audioSource.volume >= 1)
+        {
+            audioSource.volume = 1;
+            audioState = 1;
+        }
+    }
+
     public void GameMusic()
     {
+        audioState = 2;
         audioSource.clip = gameMusic;
         audioSource.Play();
     }

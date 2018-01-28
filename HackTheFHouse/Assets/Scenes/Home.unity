@@ -253,7 +253,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 346
+  orthographic size: 1560
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 810120304}
-  speed: 1
+  speed: 7
   left: {fileID: 96354745}
   right: {fileID: 636417075}
   top: {fileID: 37815990}
@@ -487,6 +487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   infectTimer: 2
+  desinfectRatio: 2
   playerIsHere: 0
   canAlertGuards: 0
   topRelation:
