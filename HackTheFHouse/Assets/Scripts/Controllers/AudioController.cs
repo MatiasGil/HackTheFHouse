@@ -8,10 +8,15 @@ public class AudioController : MonoBehaviour
     public static AudioController instance;
     public static AudioController Instance { get { return instance; } }
     
+    [SerializeField]
     private AudioSource audioSource;
+    [SerializeField]
+    private AudioSource audioLoop;
 
     [SerializeField]
     private AudioClip mainMenuMusic;
+    [SerializeField]
+    private AudioClip gameMusicIntro;
     [SerializeField]
     private AudioClip gameMusic;
 
@@ -38,17 +43,11 @@ public class AudioController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.J))
-        {
-            audioState = 2;
-        }
-
         if (audioState == 2 && audioSource.volume > 0)
             audioSource.volume -= 1 * Time.deltaTime;
 
         if (audioState == 2 && audioSource.volume <= 0)
         {
-            //GameMusic();
             audioState = 3;
         }
 
@@ -60,12 +59,34 @@ public class AudioController : MonoBehaviour
             audioSource.volume = 1;
             audioState = 1;
         }
+
+        //if (audioSource.clip == gameMusicIntro && !audioSource.isPlaying)
+            //GameMusicLoop();
     }
 
-    public void GameMusic()
+    public void GameMusicIntro()
     {
-        audioState = 2;
-        audioSource.clip = gameMusic;
+        //audioState = 2;
+        audioSource.clip = gameMusicIntro;
         audioSource.Play();
+        StartCoroutine(IntroAndContinue());
+        //IntroAndContinue();
+    }
+
+    private IEnumerator IntroAndContinue()
+    {
+        //audioSource.Play();
+        //audioLoop.Play();
+        //audioLoop.Pause();
+        
+        yield return new WaitForSeconds(4.65f);
+    
+        //audioSource.Stop();
+        GameMusicLoop();
+    }
+
+    private void GameMusicLoop()
+    {
+        audioLoop.Play();
     }
 }
