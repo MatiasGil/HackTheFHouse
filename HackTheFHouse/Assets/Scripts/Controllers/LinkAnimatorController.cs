@@ -16,7 +16,7 @@ public class LinkAnimatorController : MonoBehaviour
 
     public void RunAnimation()
     {
-        //for (int i = 0; i < animators.Count; i++)
-            //animators[i].Play();
+        for (int i = 0; i < animators.Count; i++)
+            animators[i].Play("moved");
     }
 }

@@ -26,7 +26,7 @@ public class ElectricElement : MonoBehaviour {
 	public class Relation
 	{
 		public ElectricElement electricElement;
-		public Animator linkAnimator;
+		public LinkAnimatorController linkAnimator;
 	}
 
 	public string @name;
@@ -123,17 +123,17 @@ public class ElectricElement : MonoBehaviour {
 	{
 		switch (direction) {
 		case Direction.up:
-			topRelation.linkAnimator.SetTrigger ("moved");
+			topRelation.linkAnimator.RunAnimation();
 			break;
 		case Direction.down:
-			botRelation.linkAnimator.SetTrigger ("moved");
-			break;
+			botRelation.linkAnimator.RunAnimation();
+                break;
 		case Direction.left:
-			leftRelation.linkAnimator.SetTrigger ("moved");
-			break;
+			leftRelation.linkAnimator.RunAnimation();
+                break;
 		case Direction.right:
-			rightRelation.linkAnimator.SetTrigger ("moved");
-			break;
+			rightRelation.linkAnimator.RunAnimation();
+                break;
 		}
 
 		playerIsHere = false;
