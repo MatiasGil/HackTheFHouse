@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour {
 
 	private bool moving = false;
 
+	private bool canMove = false;
+
 	private static PlayerController instance;
 	public static PlayerController Instance { get { return instance; }}
 
@@ -24,20 +26,22 @@ public class PlayerController : MonoBehaviour {
 
 	private void Update()
 	{
-		if (Input.GetKeyDown (KeyCode.UpArrow)) {
-			MoveUp ();
-		}
-
-		if (Input.GetKeyDown (KeyCode.DownArrow)) {
-			MoveDown ();
-		}
-
-		if (Input.GetKeyDown (KeyCode.RightArrow)) {
-			MoveRight ();
-		}
-
-		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-			MoveLeft ();
+		if (canMove) {
+			if (Input.GetKeyDown (KeyCode.UpArrow)) {
+				MoveUp ();
+			}
+			
+			if (Input.GetKeyDown (KeyCode.DownArrow)) {
+				MoveDown ();
+			}
+			
+			if (Input.GetKeyDown (KeyCode.RightArrow)) {
+				MoveRight ();
+			}
+			
+			if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+				MoveLeft ();
+			}
 		}
 	}
 
@@ -45,6 +49,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		animatorController.SetTrigger ("startgame");
 		Invoke ("ChangePosition", .25f);
+		canMove = true;
 	}
 
 	private void MoveLeft()
