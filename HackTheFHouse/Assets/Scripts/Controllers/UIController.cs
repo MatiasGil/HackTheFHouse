@@ -19,6 +19,11 @@ public class UIController : MonoBehaviour
     [SerializeField]
     public Button startLevel;
 
+	[SerializeField]
+	private GameObject winObject;
+	[SerializeField]
+	private GameObject looseObject;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -85,10 +90,10 @@ public class UIController : MonoBehaviour
 
     public void GameOver (bool win)
     {
-        if (win)
-            Debug.Log("Win!");
-        else
-            Debug.Log("Loose!");
+		if (win)
+			winObject.SetActive (true);
+		else
+			Invoke ("ShowLost", .1f);
     }
 
     private void SceneLoaded(Scene scene, LoadSceneMode mode)
@@ -99,4 +104,16 @@ public class UIController : MonoBehaviour
 			startLevelBack.gameObject.SetActive (true);
         }
     }
+
+	public void ShowLost()
+	{
+		looseObject.SetActive (true);
+	}
+
+	public void BTN_PlayAgain()
+	{
+		SceneManager.LoadScene ("main");
+		winObject.SetActive (false);
+		looseObject.SetActive (false);
+	}
 }

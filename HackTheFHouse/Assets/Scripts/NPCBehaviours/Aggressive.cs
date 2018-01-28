@@ -52,6 +52,7 @@ public class Aggressive : MonoBehaviour, iNPCBehaviour
     public void OnUpdate()
     {
         npcTransform.position = Vector3.MoveTowards(npcTransform.position, points[currentTargetPoint].position, speed * Time.deltaTime);
+		viewCone.position = npcTransform.position;
 
         if (Vector2.Distance(npcTransform.position, points[currentTargetPoint].position) < threshold)
         {
