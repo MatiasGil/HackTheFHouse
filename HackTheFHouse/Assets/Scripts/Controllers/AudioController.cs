@@ -59,9 +59,6 @@ public class AudioController : MonoBehaviour
             audioSource.volume = 1;
             audioState = 1;
         }
-
-        //if (audioSource.clip == gameMusicIntro && !audioSource.isPlaying)
-            //GameMusicLoop();
     }
 
     public void GameMusicIntro()
@@ -70,18 +67,11 @@ public class AudioController : MonoBehaviour
         audioSource.clip = gameMusicIntro;
         audioSource.Play();
         StartCoroutine(IntroAndContinue());
-        //IntroAndContinue();
     }
 
     private IEnumerator IntroAndContinue()
     {
-        //audioSource.Play();
-        //audioLoop.Play();
-        //audioLoop.Pause();
-        
         yield return new WaitForSeconds(4.65f);
-    
-        //audioSource.Stop();
         GameMusicLoop();
     }
 
