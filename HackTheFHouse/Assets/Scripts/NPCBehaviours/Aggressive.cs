@@ -36,27 +36,9 @@ public class Aggressive : MonoBehaviour, iNPCBehaviour
 
     public void OnEnter()
     {
-        LookAtPoint();
         alert = true;
-
-
-		float minDistance = 0; 
-
-		for (int i = 0; i < points.Length; i++) {
-
-			float distance = Vector2.Distance (transform.position, points [i].position);
-
-			if (i == 0) {
-				minDistance = distance;
-			} else {
-				if (minDistance > distance) {
-					minDistance = distance;
-					currentTargetPoint = i;
-				}
-			}
-
-
-		}
+        BestPoint();
+        LookAtPoint();
     }
 
     public void OnUpdate()
@@ -83,6 +65,25 @@ public class Aggressive : MonoBehaviour, iNPCBehaviour
                     IsDone();
             }
             LookAtPoint();
+        }
+    }
+
+    private void BestPoint()
+    {
+        float minDistance = 0;
+        for (int i = 0; i < points.Length; i++)
+        {
+            float distance = Vector2.Distance(transform.position, points[i].position);
+            if (i == 0)
+                minDistance = distance;
+            else
+            {
+                if (minDistance > distance)
+                {
+                    minDistance = distance;
+                    currentTargetPoint = i;
+                }
+            }
         }
     }
 

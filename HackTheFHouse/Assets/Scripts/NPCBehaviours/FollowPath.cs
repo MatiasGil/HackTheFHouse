@@ -33,6 +33,7 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
 
 	public void OnEnter()
 	{
+        BestPoint();
         LookAtPoint();
     }
 
@@ -48,6 +49,25 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
                 currentTargetPoint++;
             LookAtPoint();
         }        
+    }
+
+    private void BestPoint()
+    {
+        float minDistance = 0;
+        for (int i = 0; i < points.Length; i++)
+        {
+            float distance = Vector2.Distance(transform.position, points[i].position);
+            if (i == 0)
+                minDistance = distance;
+            else
+            {
+                if (minDistance > distance)
+                {
+                    minDistance = distance;
+                    currentTargetPoint = i;
+                }
+            }
+        }
     }
 
     private void LookAtPoint()
