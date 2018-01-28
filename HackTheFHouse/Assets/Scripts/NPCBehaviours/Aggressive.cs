@@ -28,10 +28,13 @@ public class Aggressive : MonoBehaviour, iNPCBehaviour
 	float lastFrameXPos;
 	float lastFrameYPos;
 
+    private Transform viewCone;
+
 	private BehaviourType @type;
 
-    public void Init(Transform npcTrasform, NPCController npcController)
+    public void Init(Transform npcTrasform, NPCController npcController, Transform viewCone)
     {
+        this.viewCone = viewCone;
 		lastFrameXPos = transform.position.x;
 		lastFrameYPos = transform.position.y;
         this.npcTransform = npcTrasform;
@@ -43,7 +46,7 @@ public class Aggressive : MonoBehaviour, iNPCBehaviour
     {
         alert = true;
         BestPoint();
-        //LookAtPoint();
+        LookAtPoint();
     }
 
     public void OnUpdate()
@@ -69,8 +72,15 @@ public class Aggressive : MonoBehaviour, iNPCBehaviour
                 else
                     IsDone();
             }
-            //LookAtPoint();
+            LookAtPoint();
         }
+        UpdatePosition();
+    }
+
+    private void UpdatePosition()
+    {
+        lastFrameXPos = transform.position.x;
+        lastFrameYPos = transform.position.y;
     }
 
     private void BestPoint()
@@ -92,12 +102,12 @@ public class Aggressive : MonoBehaviour, iNPCBehaviour
         }
     }
 
-	/*
+	
     private void LookAtPoint()
     {
-        npcTransform.right = points[currentTargetPoint].position - npcTransform.position;
+        viewCone.right = points[currentTargetPoint].position - npcTransform.position;
     }
-    */
+    
 
     public string getName()
     {

@@ -12,7 +12,7 @@ public interface iNPCBehaviour {
 	
 	void OnEnter();
 	void OnUpdate();
-	void Init (Transform npcTransform, NPCController npcController);
+	void Init (Transform npcTransform, NPCController npcController, Transform viewCone);
 	string getName ();
     void SetTarget(ElectricElement electricElement);
     void IsDone();

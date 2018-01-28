@@ -22,6 +22,8 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
     [SerializeField]
 	private float threshold;
 
+    private Transform viewCone;
+
 
 	float lastFrameXPos;
 	float lastFrameYPos;
@@ -29,8 +31,9 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
 
 	private BehaviourType @type;
 
-	public void Init(Transform npcTrasform, NPCController npcController)
+	public void Init(Transform npcTrasform, NPCController npcController, Transform viewCone)
 	{
+        this.viewCone = viewCone;
 		this.npcTransform = npcTrasform;
         this.npcController = npcController;
 		@type = BehaviourType.pasive;
@@ -39,7 +42,7 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
 	public void OnEnter()
 	{
         BestPoint();
-        //LookAtPoint();
+        LookAtPoint();
     }
 
     public void OnUpdate()
@@ -52,8 +55,19 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
                 currentTargetPoint = 0;
             else
                 currentTargetPoint++;
-            //LookAtPoint();
-        }       
+            LookAtPoint();
+        }
+        UpdatePosition();
+    }
+
+    private void UpdatePosition()
+    {
+        //lastFrameXPos = transform.position.x;
+        //lastFrameYPos = transform.position.y;
+        lastFrameXPos = npcTransform.transform.position.x;
+        lastFrameYPos = npcTransform.transform.position.y;
+
+        
     }
 
     private void BestPoint()
@@ -75,12 +89,16 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
         }
     }
 
-	/*
+	
     private void LookAtPoint()
     {
-        npcTransform.right = points[currentTargetPoint].position - npcTransform.position;
+        viewCone.right = points[currentTargetPoint].position - npcTransform.position;
+        //viewCone.right = points[currentTargetPoint].position - viewCone.position;
+
+        
+        Debug.Log(viewCone.right = points[currentTargetPoint].position - viewCone.position);
     }
-	*/
+	
 
 	public string getName()
 	{

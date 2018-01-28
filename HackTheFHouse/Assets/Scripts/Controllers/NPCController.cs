@@ -17,6 +17,9 @@ public class NPCController : MonoBehaviour {
 	[SerializeField]
 	private string initialBheaviour;
 
+    [SerializeField]
+    private Transform view;
+
 	private void Awake()
 	{
         animatorController = GetComponent<Animator>();
@@ -25,7 +28,7 @@ public class NPCController : MonoBehaviour {
         {
 			iNPCBehaviour thisBehaviour = behaviourObject.GetComponent<iNPCBehaviour> ();
 			allBehaviours.Add (thisBehaviour.getName (), thisBehaviour);
-            thisBehaviour.Init(transform, this);
+            thisBehaviour.Init(transform, this, view);
 		}
 	}
 
@@ -40,12 +43,15 @@ public class NPCController : MonoBehaviour {
 
 		Vector2 actualSpeed = activeBehaviour.getActiveSpeed ();
 
+   
+
 		if (actualSpeed.x > actualSpeed.y) {
 			if (actualSpeed.x > 0) {
 				animatorController.SetInteger ("x", 1);
+                
 			} else {
 				animatorController.SetInteger ("x", -1);
-			}
+            }
 
 			animatorController.SetInteger ("y", 0);
 		} else {
