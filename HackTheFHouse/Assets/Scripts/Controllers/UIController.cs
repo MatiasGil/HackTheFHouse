@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class UIController : MonoBehaviour
     private Animator animator;
     [SerializeField]
     private Image fade;
+
+    [SerializeField]
+    public Button startLevel;
 
 	[SerializeField]
 	private Slider infectionBar;
@@ -25,9 +29,11 @@ public class UIController : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this.gameObject);
 
+        SceneManager.sceneLoaded += SceneLoaded;
+
         animator = GetComponent<Animator>();
     }
-
+    
     public void ButtonPlay()
     {
         GameController.Instance.Play();
@@ -70,11 +76,25 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void StartLevelButton()
+    {
+        startLevel.gameObject.SetActive(false);
+        GameController.Instance.StartLevel();
+    }
+
     public void GameOver (bool win)
     {
         if (win)
             Debug.Log("Win!");
         else
             Debug.Log("Loose!");
+    }
+
+    private void SceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Tutorial")
+        {
+            startLevel.gameObject.SetActive(true);
+        }
     }
 }
