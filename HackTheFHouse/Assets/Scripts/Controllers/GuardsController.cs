@@ -19,7 +19,7 @@ public class GuardsController : MonoBehaviour {
 	{
 
 		foreach (ElectricElement electronicElement in electronicElementsWithAlert) {
-			electronicElement.eventAlertGuards += ElectronicElementAlert;
+			electronicElement.EventAlertGuards += ElectronicElementAlert;
 		}
 	}
 
