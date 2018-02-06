@@ -98,6 +98,7 @@ public class ElectricElement : MonoBehaviour
 
         if (isTheLastOne)
             blockedSprite.SetActive(true);
+
         if (canAlertGuards)
             alertGuardsImage.SetActive(true);
     }
@@ -136,8 +137,10 @@ public class ElectricElement : MonoBehaviour
         if (activeState != State.infected)
         {
             if (isTheLastOne)
+            {
                 if (GameController.Instance.readyToNextLevel)
                     StartInfection();
+            }
             else
                 StartInfection();
         }
@@ -167,9 +170,10 @@ public class ElectricElement : MonoBehaviour
         if (activeState == State.beingInfected)
         {
             if (canAlertGuards)
+            {
                 if (EventAlertGuards != null)
                     EventAlertGuards(this, false);
-
+            }
             activeState = State.beingDesinfected;
         }
     }
