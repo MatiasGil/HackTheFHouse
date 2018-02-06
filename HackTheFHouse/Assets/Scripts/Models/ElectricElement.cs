@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -314,5 +315,20 @@ public class ElectricElement : MonoBehaviour
         {
             blockedSprite.SetActive(false);
         }
+    }
+
+
+    void OnDrawGizmos()
+    {
+        GUIStyle guiStyle = new GUIStyle
+        {
+            fontSize = 20,
+            alignment = TextAnchor.MiddleCenter,
+          
+        };
+
+        Vector3 pos = transform.position;
+        pos.y += 250;
+        Handles.Label(pos, transform.name, guiStyle);
     }
 }

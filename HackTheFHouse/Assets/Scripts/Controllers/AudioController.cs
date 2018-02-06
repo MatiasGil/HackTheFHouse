@@ -89,7 +89,6 @@ public class AudioController : MonoBehaviour
 
 	public void PlaySFX(string name, bool changeTimer = false, float Timer = 1)
 	{
-		Debug.Log (name);
 		if (audioSFXMap.ContainsKey (name)) {
             switch (name)
             {

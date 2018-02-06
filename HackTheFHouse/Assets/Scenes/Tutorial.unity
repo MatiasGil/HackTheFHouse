@@ -4091,7 +4091,7 @@ Prefab:
         type: 2}
       propertyPath: rightRelation.electricElement
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 797896409}
     - target: {fileID: 114710281802722218, guid: 2991f9889f9e346d4ad45bac0a16b89f,
         type: 2}
       propertyPath: rightRelation.linkAnimator
@@ -4802,7 +4802,7 @@ Prefab:
         type: 2}
       propertyPath: rightRelation.electricElement
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 335982060}
     - target: {fileID: 114710281802722218, guid: 2991f9889f9e346d4ad45bac0a16b89f,
         type: 2}
       propertyPath: rightRelation.linkAnimator
