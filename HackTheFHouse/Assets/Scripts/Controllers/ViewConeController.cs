@@ -12,16 +12,14 @@ public class ViewConeController : MonoBehaviour {
 		if (collision.tag == "ElectricElement")
 		{
 			ElectricElement targetElectricElement = collision.GetComponent<ElectricElement> ();
-			if (targetElectricElement != null) {
-				if (targetElectricElement.activeState == ElectricElement.State.beingInfected) {
-					if (npcController.activeBehaviour.getType () != BehaviourType.aggressive) {
+			if (targetElectricElement != null)
+            {
+				if (targetElectricElement.activeState == ElectricElement.State.beingInfected)
+					if (npcController.activeBehaviour.getType () != BehaviourType.aggressive)
 						npcController.ChangeBehaviourTo (string.Format ("Aggressive_{0}", targetElectricElement.name), targetElectricElement);
-					}
-				} else if (targetElectricElement.activeState == ElectricElement.State.beingDesinfected || targetElectricElement.activeState == ElectricElement.State.infected) {
-					if (npcController.activeBehaviour.getType () == BehaviourType.aggressive) {
+                else if (targetElectricElement.activeState == ElectricElement.State.beingDesinfected || targetElectricElement.activeState == ElectricElement.State.infected)
+					if (npcController.activeBehaviour.getType () == BehaviourType.aggressive)
 						npcController.ChangeBehaviourTo ("FollowPath");
-					}
-				}
 			}
 		}   
 	}

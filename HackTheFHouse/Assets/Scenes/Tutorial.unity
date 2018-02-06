@@ -3029,6 +3029,11 @@ Prefab:
       propertyPath: leftRelation.linkAnimator
       value: 
       objectReference: {fileID: 784683637}
+    - target: {fileID: 114860741891619222, guid: dd32ee68e4ac40a4497b985e8104bacd,
+        type: 2}
+      propertyPath: name
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd32ee68e4ac40a4497b985e8104bacd, type: 2}
   m_IsPrefabParent: 0

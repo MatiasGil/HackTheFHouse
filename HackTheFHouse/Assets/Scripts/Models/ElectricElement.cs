@@ -84,23 +84,20 @@ public class ElectricElement : MonoBehaviour
 
     private void Awake()
     {
+        // Toma el nombre que se le dio al GameObject, no se si es necesario todo esto
+        @name = transform.name;
+
         thisSpriteRenderer = GetComponent<SpriteRenderer>();
         desinfectedColor = Color.white;
         infectedColor = Color.green;
         unpluggedColor = Color.black;
         completeInfected = Color.red;
-
         infectionBarRect = infectionBar.GetComponent<RectTransform>();
-
         thisSpriteRenderer.color = desinfectedColor;
-
         activeState = State.desinfected;
 
         if (isTheLastOne)
-        {
             blockedSprite.SetActive(true);
-        }
-
         if (canAlertGuards)
             alertGuardsImage.SetActive(true);
     }
@@ -139,16 +136,10 @@ public class ElectricElement : MonoBehaviour
         if (activeState != State.infected)
         {
             if (isTheLastOne)
-            {
                 if (GameController.Instance.readyToNextLevel)
-                {
                     StartInfection();
-                }
-            }
             else
-            {
                 StartInfection();
-            }
         }
     }
 
@@ -176,12 +167,9 @@ public class ElectricElement : MonoBehaviour
         if (activeState == State.beingInfected)
         {
             if (canAlertGuards)
-            {
                 if (EventAlertGuards != null)
-                {
                     EventAlertGuards(this, false);
-                }
-            }
+
             activeState = State.beingDesinfected;
         }
     }
@@ -191,17 +179,12 @@ public class ElectricElement : MonoBehaviour
         if (canAlertGuards)
         {
             if (EventAlertGuards != null)
-            {
                 EventAlertGuards(this, true);
-            }
         }
 
         AudioController.Instance.PlaySFX("infection");
-
         EnableInfectionBar(infectTimer);
-
         timeLeftToInfect = infectTimer - (infectTimer * infectPercent / 100);
-
         activeState = State.beingInfected;
     }
 
@@ -210,13 +193,9 @@ public class ElectricElement : MonoBehaviour
         timeLeftToInfect -= Time.deltaTime;
 
         if (timeLeftToInfect <= 0)
-        {
             Infected();
-        }
         else
-        {
             infectPercent = 100 - Mathf.FloorToInt(timeLeftToInfect * 100 / infectTimer);
-        }
     }
 
     private void ProcessDesinfect()
@@ -224,13 +203,9 @@ public class ElectricElement : MonoBehaviour
         timeLeftToInfect += Time.deltaTime * desinfectRatio;
 
         if (timeLeftToInfect < infectTimer)
-        {
             infectPercent = 100 - Mathf.FloorToInt(timeLeftToInfect * 100 / infectTimer);
-        }
         else
-        {
             Desinfected();
-        }
     }
 
     private void Infected()
@@ -241,20 +216,13 @@ public class ElectricElement : MonoBehaviour
         thisSpriteRenderer.color = completeInfected;
         DisableInfectionBar();
         if (canAlertGuards)
-        {
             if (EventAlertGuards != null)
-            {
                 EventAlertGuards(this, false);
-            }
-        }
 
         AudioController.Instance.PlaySFX("infectCompleted");
 
         if (isTheLastOne)
-        {
-
             GameController.Instance.LevelFinished();
-        }
 
         GameController.Instance.ElectricElementInfected(this);
     }
@@ -277,9 +245,7 @@ public class ElectricElement : MonoBehaviour
     public void Unplug()
     {
         if (!playerIsHere)
-        {
             return;
-        }
 
         activeState = State.unpluged;
         infectPercent = 0;
@@ -312,12 +278,10 @@ public class ElectricElement : MonoBehaviour
     public void ReadyToBeInfected()
     {
         if (isTheLastOne)
-        {
             blockedSprite.SetActive(false);
-        }
     }
 
-
+    // Muestra el numero correspondiente en el Editor solamente
     void OnDrawGizmos()
     {
         GUIStyle guiStyle = new GUIStyle
