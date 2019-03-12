@@ -41,23 +41,23 @@ public class NPCController : MonoBehaviour {
 	{
 		activeBehaviour.OnUpdate ();
 
-		Vector2 actualSpeed = activeBehaviour.getActiveSpeed ();
+		Vector2 actualSpeed = activeBehaviour.getActiveSpeed();
 
-		if (actualSpeed.x > actualSpeed.y) {
-			if (actualSpeed.x > 0) {
+		if (actualSpeed.x > actualSpeed.y) 
+		{
+			if (actualSpeed.x > 0) 
 				animatorController.SetInteger ("x", 1);
-                
-			} else {
+			else 
 				animatorController.SetInteger ("x", -1);
-            }
-
+			
 			animatorController.SetInteger ("y", 0);
-		} else {
-			if (actualSpeed.y > 0) {
+		} 
+		else 
+		{
+			if (actualSpeed.y > 0) 
 				animatorController.SetInteger ("y", 1);
-			} else {
+			else 
 				animatorController.SetInteger ("y", -1);
-			}
 
 			animatorController.SetInteger ("x", 0);
 		}
@@ -72,15 +72,10 @@ public class NPCController : MonoBehaviour {
 			activeBehaviour.OnEnter();
 
             if (activeBehaviour.getType() == BehaviourType.aggressive)
-            {
                 activeBehaviour.SetTarget(electricElement);
-            }
-            
         }
         else
-        {
 			Debug.LogWarning ("There is no behaviour with that id, behaviour did not change");
-		}
 	}
 
     public void BehaviourIsDone()
@@ -91,14 +86,15 @@ public class NPCController : MonoBehaviour {
 
 	public void ElectronicElementAlert(ElectricElement electronicElement, bool infecting)
 	{
-		if (infecting) {
-			if (activeBehaviour.getType () != BehaviourType.aggressive) {
+		if (infecting) 
+		{
+			if (activeBehaviour.getType() != BehaviourType.aggressive) 
 				ChangeBehaviourTo (string.Format ("Aggressive_{0}", electronicElement.name), electronicElement);
-			}
-		} else {
-			if (activeBehaviour.getType () != BehaviourType.pasive) {
+		} 
+		else 
+		{
+			if (activeBehaviour.getType() != BehaviourType.pasive) 
 				ChangeBehaviourTo ("FollowPath");
-			}
 		}
 	}
 }

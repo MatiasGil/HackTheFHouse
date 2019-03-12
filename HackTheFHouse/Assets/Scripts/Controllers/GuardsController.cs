@@ -10,24 +10,16 @@ public class GuardsController : MonoBehaviour {
 	[SerializeField]
 	private ElectricElement[] electronicElementsWithAlert;
 
-
-	private void Awake()
-	{
-	}
-
 	private void Start()
 	{
-
-		foreach (ElectricElement electronicElement in electronicElementsWithAlert) {
+		foreach (ElectricElement electronicElement in electronicElementsWithAlert) 
 			electronicElement.EventAlertGuards += ElectronicElementAlert;
-		}
 	}
 
 
 	private void ElectronicElementAlert(ElectricElement electronicElement, bool infecting)
 	{
-		foreach (NPCController npcController in npcControllers) {
+		foreach (NPCController npcController in npcControllers) 
 			npcController.ElectronicElementAlert (electronicElement, infecting);
-		}
 	}
 }

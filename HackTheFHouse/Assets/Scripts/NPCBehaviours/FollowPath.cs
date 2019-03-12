@@ -43,6 +43,7 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
 	{
         BestPoint();
         LookAtPoint();
+        viewCone.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     public void OnUpdate()
@@ -56,19 +57,15 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
                 currentTargetPoint = 0;
             else
                 currentTargetPoint++;
-            LookAtPoint();
         }
+        LookAtPoint();
         UpdatePosition();
     }
 
     private void UpdatePosition()
     {
-        //lastFrameXPos = transform.position.x;
-        //lastFrameYPos = transform.position.y;
         lastFrameXPos = npcTransform.transform.position.x;
         lastFrameYPos = npcTransform.transform.position.y;
-
-        
     }
 
     private void BestPoint()
@@ -90,22 +87,13 @@ public class FollowPath : MonoBehaviour, iNPCBehaviour
         }
     }
 
-	
     private void LookAtPoint()
     {
-        viewCone.right = points[currentTargetPoint].position - npcTransform.position;
-
-
-        Quaternion q = Quaternion.LookRotation(viewCone.position - points[currentTargetPoint].position, Vector3.forward);
-        q.y = 0;
-        q.x = 0;
-        //q.z += 180;
-
-
-
-        viewCone.rotation = q;
+        Quaternion target = Quaternion.LookRotation(viewCone.position - points[currentTargetPoint].position, Vector3.forward);
+        target.y = 0;
+        target.x = 0;
+        viewCone.rotation = Quaternion.Lerp(viewCone.rotation, target, 0.1f);
     }
-	
 
 	public string getName()
 	{
